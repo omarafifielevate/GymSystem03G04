@@ -16,5 +16,7 @@ namespace GymSystem.DAL.Contracts
         Task<int> UpdateAsync(TEntity entity, CancellationToken ct);
         Task<int> DeleteAsync(TEntity entity, CancellationToken ct);
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken ct);
+        Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken ct);
+
     }
 }

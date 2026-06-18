@@ -74,6 +74,9 @@ namespace GymSystem.DAL.Migrations
                     b.Property<bool>("IsAttended")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("SessionId", "MemberId");
 
                     b.ToTable("Booking");
@@ -248,6 +251,9 @@ namespace GymSystem.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GetDate()");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("PlanId", "MemberId");
 

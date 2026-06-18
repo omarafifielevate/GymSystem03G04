@@ -13,5 +13,10 @@ namespace GymSystem.BLL.Contracts
         Task<IEnumerable<MemberViewModel>> GetAllMembersAsync(CancellationToken ct);
 
         Task<bool> CreateMemberAsync(CreateMemberViewModel model, CancellationToken ct);
+        Task<MemberDetailsViewModel?> GetMemberDetailsByIdAsync(int id, CancellationToken ct);
+        Task<HealthRecordViewModel?> GetMemberHealthRecordAsync(int memberId, CancellationToken ct);
+        Task<MemberToUpdateViewModel?> GetMemberToUpdateAsync(int memberId, CancellationToken ct);
+        Task<bool> UpdateMemberAsync(int id, MemberToUpdateViewModel model, CancellationToken ct);
+        Task<bool> RemoveMemberAsync(int id, CancellationToken ct);
     }
 }

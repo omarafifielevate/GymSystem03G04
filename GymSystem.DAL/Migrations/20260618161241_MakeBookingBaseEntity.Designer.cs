@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymSystem.DAL.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    [Migration("20260611132233_FullDatabase")]
-    partial class FullDatabase
+    [Migration("20260618161241_MakeBookingBaseEntity")]
+    partial class MakeBookingBaseEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,6 +76,9 @@ namespace GymSystem.DAL.Migrations
 
                     b.Property<bool>("IsAttended")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("SessionId", "MemberId");
 
@@ -164,7 +167,6 @@ namespace GymSystem.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -195,8 +197,8 @@ namespace GymSystem.DAL.Migrations
                         .HasColumnName("JoinDate")
                         .HasDefaultValueSql("GetDate()");
 
-                    b.Property<DateTime>("DateofBirth")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("DateofBirth")
+                        .HasColumnType("date");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -252,6 +254,9 @@ namespace GymSystem.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GetDate()");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("PlanId", "MemberId");
 
@@ -363,8 +368,8 @@ namespace GymSystem.DAL.Migrations
                         .HasColumnName("HireDate")
                         .HasDefaultValueSql("GetDate()");
 
-                    b.Property<DateTime>("DateofBirth")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("DateofBirth")
+                        .HasColumnType("date");
 
                     b.Property<string>("Email")
                         .IsRequired()
