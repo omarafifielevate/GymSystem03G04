@@ -1,3 +1,5 @@
+using GymSystem.BLL.Contracts;
+using GymSystem.BLL.Services;
 using GymSystem.DAL.AppDbContexts;
 using GymSystem.DAL.Contracts;
 using GymSystem.DAL.Repositories;
@@ -16,6 +18,7 @@ namespace GymSystemG04
 
             //builder.Services.AddScoped<IPlanRepository, PlanRepository>();
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddScoped<IMemberService, MemberService>();
 
             builder.Services.AddDbContext<GymDbContext>(options =>
             {

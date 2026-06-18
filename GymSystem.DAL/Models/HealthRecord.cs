@@ -11,7 +11,7 @@ namespace GymSystem.DAL.Models
         public int Hieght { get; set; }
         public float Wieght { get; set; }
         public string BloodType { get; set; } = default!;
-        public string Notes { get; set; } = default!;
+        public string? Notes { get; set; } = default!;
 
         public Member Member { get; set; }
         public int MemberId { get; set; }

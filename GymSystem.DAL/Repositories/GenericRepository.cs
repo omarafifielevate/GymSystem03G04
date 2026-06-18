@@ -2,9 +2,11 @@
 using GymSystem.DAL.Contracts;
 using GymSystem.DAL.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,6 +27,11 @@ namespace GymSystem.DAL.Repositories
         {
             _set.Add(entity);
             return await _dbContext.SaveChangesAsync(ct);
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken ct)
+        {
+            return await _set.AnyAsync(predicate, ct);
         }
 
         public async Task<int> DeleteAsync(TEntity entity, CancellationToken ct)
