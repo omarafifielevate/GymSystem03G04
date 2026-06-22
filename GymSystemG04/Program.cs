@@ -1,5 +1,7 @@
 using GymSystem.BLL.Contracts;
+using GymSystem.BLL.MappingProfiles;
 using GymSystem.BLL.Services;
+using GymSystem.DAL;
 using GymSystem.DAL.AppDbContexts;
 using GymSystem.DAL.Contracts;
 using GymSystem.DAL.Repositories;
@@ -19,6 +21,10 @@ namespace GymSystemG04
             //builder.Services.AddScoped<IPlanRepository, PlanRepository>();
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddScoped<IMemberService, MemberService>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<ISessionRepository, SessionRepository>();
+            builder.Services.AddScoped<ISessionService, SessionService>();
+            builder.Services.AddAutoMapper(m => m.AddProfile(new MappingProfile()));
 
             builder.Services.AddDbContext<GymDbContext>(options =>
             {

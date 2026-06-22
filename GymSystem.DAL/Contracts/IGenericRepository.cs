@@ -12,9 +12,9 @@ namespace GymSystem.DAL.Contracts
     {
         Task<TEntity> GetByIdAsync(int id, CancellationToken ct);
         Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken ct);
-        Task<int> AddAsync(TEntity entity, CancellationToken ct);
-        Task<int> UpdateAsync(TEntity entity, CancellationToken ct);
-        Task<int> DeleteAsync(TEntity entity, CancellationToken ct);
+        void Add(TEntity entity);
+        void Update(TEntity entity);
+        void Delete(TEntity entity);
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken ct);
         Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken ct);
 

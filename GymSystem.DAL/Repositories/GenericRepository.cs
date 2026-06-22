@@ -23,10 +23,9 @@ namespace GymSystem.DAL.Repositories
         }
 
 
-        public async Task<int> AddAsync(TEntity entity, CancellationToken ct)
+        public void Add(TEntity entity)
         {
             _set.Add(entity);
-            return await _dbContext.SaveChangesAsync(ct);
         }
 
         public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken ct)
@@ -34,10 +33,9 @@ namespace GymSystem.DAL.Repositories
             return await _set.AnyAsync(predicate, ct);
         }
 
-        public async Task<int> DeleteAsync(TEntity entity, CancellationToken ct)
+        public void Delete(TEntity entity)
         {
             _set.Remove(entity);
-            return await _dbContext.SaveChangesAsync(ct);
         }
 
         public async Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken ct)
@@ -56,10 +54,9 @@ namespace GymSystem.DAL.Repositories
             return entity;
         }
 
-        public async Task<int> UpdateAsync(TEntity entity, CancellationToken ct)
+        public void Update(TEntity entity)
         {
             _set.Update(entity);
-            return await _dbContext.SaveChangesAsync(ct);
         }
     }
 }
