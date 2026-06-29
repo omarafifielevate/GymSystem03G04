@@ -5,13 +5,15 @@ using GymSystem.DAL;
 using GymSystem.DAL.AppDbContexts;
 using GymSystem.DAL.Contracts;
 using GymSystem.DAL.Repositories;
+using GymSystemG04.Extentions;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace GymSystemG04
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +34,8 @@ namespace GymSystemG04
             });
 
             var app = builder.Build();
+
+            await app.InitializeDatabaseAsync();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

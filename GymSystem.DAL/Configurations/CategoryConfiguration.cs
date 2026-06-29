@@ -23,8 +23,6 @@ namespace GymSystem.DAL.Configurations
                 new Category { Id = 4, Name = "Boxing" },
                 new Category { Id = 5, Name = "CrossFit" }
             );
-
-
         }
     }
 }

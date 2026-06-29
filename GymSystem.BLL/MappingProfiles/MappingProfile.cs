@@ -19,8 +19,14 @@ namespace GymSystem.BLL.MappingProfiles
             CreateMap<Session, SessionViewModel>()
                 .ForMember(dest => dest.TrainerName, opt => opt.MapFrom(s => s.Trainer.Name))
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(c => c.Category.Name));
-        }
 
+            CreateMap<CreateSessionViewModel, Session>()
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(s => s.StartDate));
+
+            CreateMap<Category, CategorySelectViewModel>();
+            CreateMap<Trainer, TrainerSelectViewModel>();
+
+        }
 
         private void MembersMappings()
         {
