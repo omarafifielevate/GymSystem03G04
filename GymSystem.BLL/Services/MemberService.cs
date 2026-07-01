@@ -15,11 +15,13 @@ namespace GymSystem.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IAttachmentService _attachmentService;
 
-        public MemberService(IUnitOfWork unitOfWork, IMapper mapper)
+        public MemberService(IUnitOfWork unitOfWork, IMapper mapper, IAttachmentService attachmentService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _attachmentService = attachmentService;
         }
 
         public async Task<bool> CreateMemberAsync(CreateMemberViewModel model, CancellationToken ct)
@@ -54,9 +56,16 @@ namespace GymSystem.BLL.Services
                 }
             };
 
+            var fileName = await _attachmentService.UploadAsync(model.PhotoFile.OpenReadStream(), model.PhotoFile.FileName
+                , "MemberPhotos", ct);
+            if(fileName == null) return false;
+            member.Photo = fileName;
 
             _memberRepo.Add(member);
             var result = await _unitOfWork.SaveChangesAsync(ct);
+
+            if (result == 0)
+                _attachmentService.Delete(fileName, "MemberPhotos");
 
             return result > 0;
 
@@ -180,6 +189,8 @@ namespace GymSystem.BLL.Services
 
             var hasFutureBookings = await _bookingRepo.AnyAsync(x => x.MemberId == id && x.BookingDate > DateTime.Now, ct);
             if(hasFutureBookings) return false;
+
+            _attachmentService.Delete(member?.Photo ?? "", "MemberPhotos");
 
             _memberRepo.Delete(member);
             var result = await _unitOfWork.SaveChangesAsync(ct);

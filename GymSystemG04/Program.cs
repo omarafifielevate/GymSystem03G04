@@ -4,8 +4,10 @@ using GymSystem.BLL.Services;
 using GymSystem.DAL;
 using GymSystem.DAL.AppDbContexts;
 using GymSystem.DAL.Contracts;
+using GymSystem.DAL.Models;
 using GymSystem.DAL.Repositories;
 using GymSystemG04.Extentions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -27,6 +29,14 @@ namespace GymSystemG04
             builder.Services.AddScoped<ISessionRepository, SessionRepository>();
             builder.Services.AddScoped<ISessionService, SessionService>();
             builder.Services.AddAutoMapper(m => m.AddProfile(new MappingProfile()));
+            builder.Services.AddScoped<IAttachmentService, AttachmentService>();
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
+            {
+                //opt.Password.RequireUppercase = true; //Default
+                //opt.Password.RequireLowercase = true; //Default
+                //opt.Password.RequiredLength = 6; //Default
+            }).AddEntityFrameworkStores<GymDbContext>();
 
             builder.Services.AddDbContext<GymDbContext>(options =>
             {

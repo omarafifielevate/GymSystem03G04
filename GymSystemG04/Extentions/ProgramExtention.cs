@@ -1,5 +1,7 @@
 ﻿using GymSystem.DAL;
 using GymSystem.DAL.AppDbContexts;
+using GymSystem.DAL.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymSystemG04.Extentions
@@ -12,6 +14,7 @@ namespace GymSystemG04.Extentions
             var dbContext = scope.ServiceProvider.GetRequiredService<GymDbContext>();
             var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
             var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
+
             if (pendingMigrations.Any())
             {
                 await dbContext.Database.MigrateAsync();
@@ -20,6 +23,7 @@ namespace GymSystemG04.Extentions
 
             //C:\Users\LOQ\Source\Repos\GymSystem07G04\GymSystemG04\wwwroot\files\
             var folderPath = Path.Combine(app.Environment.ContentRootPath, "wwwroot", "files");
+
             await DataSeeder.SeedAsync(dbContext, logger, folderPath);
 
         }
