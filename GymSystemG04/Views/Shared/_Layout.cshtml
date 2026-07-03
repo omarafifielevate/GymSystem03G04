@@ -37,18 +37,26 @@
                         <li class="nav-item">
                             <a class="nav-link active px-3 py-2 mx-2 fw-bolder fs-5" aria-current="page" asp-action="Index" asp-controller="Home">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link  px-3 py-2 mx-2 fw-bolder fs-5" aria-current="page" asp-action="Index" asp-controller="Members">Members</a>
-                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+
+                            <li class="nav-item">
+                                <a class="nav-link  px-3 py-2 mx-2 fw-bolder fs-5" aria-current="page" asp-action="Index" asp-controller="Members">Members</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link  px-3 py-2 mx-2 fw-bolder fs-5" aria-current="page" asp-action="Index" asp-controller="Trainers">Trainers</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link  px-3 py-2 mx-2 fw-bolder fs-5" aria-current="page" asp-action="Index" asp-controller="Sessions">Sessions</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link  px-3 py-2 mx-2 fw-bolder fs-5" aria-current="page" asp-action="Index" asp-controller="Plans">Plans</a>
-                        </li>
+                        @if (User.IsInRole("SuperAdmin"))
+                        {
+
+                            <li class="nav-item">
+                                <a class="nav-link  px-3 py-2 mx-2 fw-bolder fs-5" aria-current="page" asp-action="Index" asp-controller="Plans">Plans</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link  px-3 py-2 mx-2 fw-bolder fs-5" aria-current="page" asp-action="Index" asp-controller="Memberships">Memberships</a>
                         </li>

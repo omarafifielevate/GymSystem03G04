@@ -33,11 +33,18 @@ namespace GymSystemG04
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(opt =>
             {
-                //opt.Password.RequireUppercase = true; //Default
-                //opt.Password.RequireLowercase = true; //Default
-                //opt.Password.RequiredLength = 6; //Default
+                ////opt.Password.RequireUppercase = true; //Default
+                ////opt.Password.RequireLowercase = true; //Default
+                ////opt.Password.RequiredLength = 6; //Default
+                //opt.User.RequireUniqueEmail = true;
+                //opt.SignIn.
             }).AddEntityFrameworkStores<GymDbContext>();
 
+            //builder.Services.ConfigureApplicationCookie(opt =>
+            //{
+            //    //opt.LoginPath = "/account/login"; //Default
+            //    //opt.AccessDeniedPath = "/account/accessdenied"; //Default
+            //});
             builder.Services.AddDbContext<GymDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -64,7 +71,7 @@ namespace GymSystemG04
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=account}/{action=login}/{id?}");
 
             app.Run();
         }

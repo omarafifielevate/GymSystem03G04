@@ -2,12 +2,15 @@
 using GymSystem.DAL.Contracts;
 using GymSystem.DAL.Models;
 using GymSystem.DAL.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace GymSystemG04.Controllers
 {
+    [Authorize(Roles = "SuperAdmin")]
+
     public class PlansController : Controller
     {
         private readonly IGenericRepository<Plan> _planRepo;

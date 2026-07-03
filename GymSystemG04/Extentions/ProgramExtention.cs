@@ -13,6 +13,8 @@ namespace GymSystemG04.Extentions
             using var scope = app.Services.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<GymDbContext>();
             var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
 
             if (pendingMigrations.Any())
@@ -25,7 +27,7 @@ namespace GymSystemG04.Extentions
             var folderPath = Path.Combine(app.Environment.ContentRootPath, "wwwroot", "files");
 
             await DataSeeder.SeedAsync(dbContext, logger, folderPath);
-
+            await IdentityDataSeeder.SeedIdentityDataAsyc(userManager, roleManager);
         }
     }
 }

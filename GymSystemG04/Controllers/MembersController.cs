@@ -1,10 +1,12 @@
 ﻿using GymSystem.BLL.Contracts;
 using GymSystem.BLL.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace GymSystemG04.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class MembersController : Controller
     {
         private readonly IMemberService _memberService;
@@ -15,7 +17,7 @@ namespace GymSystemG04.Controllers
             _memberService = memberService;
             _attachmentService = attachmentService;
         }
-
+        //[AllowAnonymous]
         public async Task<IActionResult> Index(CancellationToken ct)
         {
             var members = await _memberService.GetAllMembersAsync(ct);

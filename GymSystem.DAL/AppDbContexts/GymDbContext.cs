@@ -27,6 +27,15 @@ namespace GymSystem.DAL.AppDbContexts
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            //modelBuilder.Entity<ApplicationUser>().ToTable("Users", "identity");
+            //modelBuilder.Entity<ApplicationUser>(u =>
+            //{
+            //    u.Property(au => au.FirstName).HasMaxLength(50);
+            //    u.Property(au => au.LastName).HasMaxLength(50);
+            //    u.Ignore(au => au.)
+            //});
+
         }
 
 
